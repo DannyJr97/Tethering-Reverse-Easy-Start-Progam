@@ -101,3 +101,4 @@ O Debug está em formato rar, depois disso é so correr o Tethering-Reverse-Easy
 [📦 Baixar debug.rar](https://github.com/DannyJr97/Tethering-Reverse-Easy-Start-Progam/raw/master/debug.rar)
 
 
+
