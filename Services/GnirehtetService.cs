@@ -105,5 +105,11 @@ namespace Tethering_Reverse_Easy_Start_Progam.Services
                 MessageBox.Show("Erro ao parar processo gnirehtet:\n" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public bool GnirehtetAtivo()
+        {
+            return Process.GetProcessesByName("gnirehtet").Length > 0;
+        }
+
     }
 }

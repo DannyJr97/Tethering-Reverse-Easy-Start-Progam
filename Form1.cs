@@ -45,6 +45,12 @@ namespace Tethering_Reverse_Easy_Start_Progam
                 return;
             }
 
+            if (adbService.GnirehtetInstalado())
+            {
+                MessageBox.Show("Gnirehtet já está instalado — não é necessário reinstalar.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             progressBarStatus.Value = 30;
             string resultado = gnirehtetService.Instalar();
             progressBarStatus.Value = 70;
@@ -61,6 +67,7 @@ namespace Tethering_Reverse_Easy_Start_Progam
             }
 
             AtualizarStatus();
+            AtualizarStatusGnirehtet();
         }
 
         private void AtualizarStatus()
@@ -75,11 +82,19 @@ namespace Tethering_Reverse_Easy_Start_Progam
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             AtualizarStatus();
+            AtualizarStatusGnirehtet();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             progressBarStatus.Value = 10;
+
+            if (!adbService.GnirehtetInstalado())
+            {
+                MessageBox.Show("Gnirehtet não está instalado, impossivel desinstalar.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                progressBarStatus.Value = 0;
+                return;
+            }
 
             if (adbService.DispositivoConectado())
             {
@@ -94,6 +109,8 @@ namespace Tethering_Reverse_Easy_Start_Progam
                 MessageBox.Show("Nenhum dispositivo conectado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 progressBarStatus.Value = 0;
             }
+
+            AtualizarStatusGnirehtet();
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -107,8 +124,24 @@ namespace Tethering_Reverse_Easy_Start_Progam
                 return;
             }
 
+            if (!adbService.GnirehtetInstalado())
+            {
+                MessageBox.Show("Gnirehtet não está instalado. Instale primeiro!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                progressBarStatus.Value = 0;
+                return;
+            }
+
+            if (gnirehtetService.GnirehtetAtivo())
+            {
+                MessageBox.Show("Gnirehtet já está rodando!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             btnRun.Enabled = false;
             progressBarStatus.Value = 30;
+
+            // Exibir mensagem pop-up
+            MessageBox.Show("Gnirehtet Activo!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             var psi = new ProcessStartInfo("cmd.exe", "/c gnirehtet run")
             {
@@ -122,11 +155,11 @@ namespace Tethering_Reverse_Easy_Start_Progam
             _gnirehtetProcess = new Process();
             _gnirehtetProcess.StartInfo = psi;
 
-            // Eventos para capturar saída em tempo real
             _gnirehtetProcess.OutputDataReceived += (s, ea) =>
             {
                 if (!string.IsNullOrEmpty(ea.Data))
-                    this.BeginInvoke(new Action(() => {
+                    this.BeginInvoke(new Action(() =>
+                    {
                         txtOutput.AppendText(ea.Data + Environment.NewLine);
                     }));
             };
@@ -134,7 +167,8 @@ namespace Tethering_Reverse_Easy_Start_Progam
             _gnirehtetProcess.ErrorDataReceived += (s, ea) =>
             {
                 if (!string.IsNullOrEmpty(ea.Data))
-                    this.BeginInvoke(new Action(() => {
+                    this.BeginInvoke(new Action(() =>
+                    {
                         txtOutput.AppendText("[ERRO] " + ea.Data + Environment.NewLine);
                     }));
             };
@@ -144,15 +178,22 @@ namespace Tethering_Reverse_Easy_Start_Progam
             _gnirehtetProcess.BeginErrorReadLine();
 
             progressBarStatus.Value = 100;
+            AtualizarStatusGnirehtet();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             progressBarStatus.Value = 10;
 
+            if (!gnirehtetService.GnirehtetAtivo())
+            {
+                MessageBox.Show("Gnirehtet não está rodando. Nada para parar!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                progressBarStatus.Value = 0;
+                return;
+            }
+
             try
             {
-                // Mata o processo cmd.exe usado (se existir)
                 if (_gnirehtetProcess != null && !_gnirehtetProcess.HasExited)
                 {
                     _gnirehtetProcess.Kill();
@@ -162,7 +203,6 @@ namespace Tethering_Reverse_Easy_Start_Progam
 
                 progressBarStatus.Value = 50;
 
-                // Mata qualquer processo gnirehtet ativo (processo filho)
                 foreach (var proc in Process.GetProcessesByName("gnirehtet"))
                 {
                     proc.Kill();
@@ -179,9 +219,58 @@ namespace Tethering_Reverse_Easy_Start_Progam
                 MessageBox.Show("Erro ao tentar parar o Gnirehtet: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 progressBarStatus.Value = 0;
             }
+
+            AtualizarStatusGnirehtet();
         }
 
+        private void AtualizarStatusGnirehtet()
+        {
+            bool ativo = gnirehtetService.GnirehtetAtivo();
+            lblStatus.Text = ativo ? "Status: Ativo" : "Status: Inativo";
+        }
+
+
         private void labelDispositivo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }
