@@ -82,4 +82,4 @@ The debug build is available as a .rar archive. After extraction, simply run:
 
 Tethering-Reverse-Easy-Start-Progam.exe
 
- [📦 Download debug (O app).rar](https://github.com/DannyJr97/Tethering-Reverse-Easy-Start-Progam/raw/master/Debug.rar)
+ [📦 Download debug.rar](https://github.com/DannyJr97/Tethering-Reverse-Easy-Start-Progam/raw/master/Debug.rar)
