@@ -1,104 +1,85 @@
-Nome do projeto
+🧩 Project Name
 Gnirehtet Easy Manager
 
----
+📄 Project Description
+Gnirehtet Easy Manager is a desktop application built in C# (Windows Forms, .NET Framework 4.8) to simplify the use of reverse tethering with gnirehtet — a tool that allows sharing your PC’s internet connection with your Android device via USB using a VPN tunnel.
 
-Descrição do projeto (README.md)
-Gnirehtet Easy Manager
-Aplicativo desktop em C# (Windows Forms, .NET Framework 4.8) para gerenciar facilmente o uso do tethering reverse com o gnirehtet, uma ferramenta que permite compartilhar a internet do PC com o celular via USB usando VPN.
+⚙️ What It Does
+This app streamlines the manual command-line workflow, automating common steps like:
 
-----
+Checking if the Android device is connected via ADB
 
-Este app facilita o processo que normalmente é feito via linha de comando (cmd), automatizando etapas comuns como:
+Verifying if gnirehtet is installed on the device
 
-Verificar se o dispositivo Android está conectado via ADB
+Installing the gnirehtet client if needed
 
-Verificar se o cliente gnirehtet está instalado no celular
+Launching the gnirehtet service (gnirehtet run) without freezing the UI
 
-Instalar o cliente gnirehtet caso necessário
+Stopping the gnirehtet service and terminating residual processes
 
-Iniciar o serviço gnirehtet (gnirehtet run) sem travar a interface
+Displaying real-time logs for monitoring
 
-Parar o serviço gnirehtet e matar processos remanescentes
+Offering a clean, beginner-friendly graphical interface
 
-Exibir logs em tempo real para monitoramento
+🎯 Motivation
+The traditional way of using gnirehtet involves CLI commands and manual process management, which may be challenging for beginners. This project enables any user to manage the internet connection and sharing via visual controls and clear feedback.
 
-Interface gráfica simples e intuitiva para usuários iniciantes
+🧠 Features
+Auto-detects Android device connection via ADB
 
+Verifies gnirehtet client presence on the Android device
 
------
-Motivação
-O processo padrão de usar o gnirehtet envolve comandos no terminal e gerenciamento manual de processos, o que pode ser complicado para iniciantes. Com este projeto, qualquer usuário pode controlar a conexão com o celular e o compartilhamento de internet diretamente com botões e feedback visual.
+One-click install for the gnirehtet client if required
 
+Launches gnirehtet service asynchronously to keep the UI responsive
 
----
-Funcionalidades
-Detecta automaticamente se o celular está conectado via ADB
+Terminates gnirehtet and cmd processes to free up ports
 
-Detecta se o cliente gnirehtet está instalado no dispositivo Android
+Displays live logs and status in a TextBox
 
-Instala o cliente gnirehtet com um clique, se necessário
+Simple GUI optimized for user-friendliness
 
-Executa o serviço gnirehtet sem travar a interface usando execução assíncrona
+🧪 Tech Stack
+C# using Windows Forms (.NET Framework 4.8)
 
-Mata processos gnirehtet e cmd para liberar a porta caso esteja ocupada
+ADB (Android Debug Bridge) for device communication
 
-Mostra logs e status em tempo real em uma TextBox
+Windows process management for command execution and control
 
-Interface gráfica simples para facilitar o uso
+🚀 How to Use
+Connect your Android device via USB with USB debugging enabled
 
-----
+Launch the app
 
-Tecnologias usadas
-C# com Windows Forms (.NET Framework 4.8)
+The app automatically checks connection and gnirehtet status
 
-ADB (Android Debug Bridge) para comunicação com o dispositivo Android
+If gnirehtet isn’t installed, click Install
 
-Processos do Windows para executar comandos e gerenciar processos externos
+Click Start to initiate the service
 
-----
+Use Stop to terminate the connection
 
-Como usar
-Conecte seu dispositivo Android via USB com depuração ativada.
-
-Abra o app.
-
-O app automaticamente verifica conexão e status da instalação do gnirehtet.
-
-Caso o gnirehtet não esteja instalado no celular, clique em "Instalar".
-
-Clique em "Iniciar" para iniciar o serviço.
-
-Para interromper a conexão, clique em "Parar".
-
-Veja os logs no painel para confirmar ações e status.
+Check the logs panel for actions and status feedback
 
 
-----
+🗂 Project Structure
+Services/
+  └── AdbService.cs         // Handles ADB commands and connection
 
-Estrutura do projeto
-Services/AdbService.cs — Gerencia comandos ADB (conexão e instalação)
+Services/
+  └── GnirehtetService.cs   // Manages gnirehtet operations and process control
 
-Services/GnirehtetService.cs — Gerencia execução do gnirehtet e controle de processos
+Helpers/
+  └── CmdHelper.cs          // Runs terminal commands and returns output
+  
+Form1.cs                    // Main UI and user interaction
 
-Helpers/CmdHelper.cs — Executa comandos no terminal e retorna saída
+📌 Notes
+This project is built for Windows and Android. Make sure ADB and gnirehtet are properly placed in the project folder. Made for educational and personal use — contributions and improvements are welcome!
 
-Form1.cs — Interface gráfica e interação com o usuário
+📦 Download
+The debug build is available as a .rar archive. After extraction, simply run:
 
+Tethering-Reverse-Easy-Start-Progam.exe
 
------
-
-Observações
-Este projeto foi desenvolvido para Windows e Androind, requer que o ADB e gnirehtet estejam configurados corretamente na pasta do projeto.
-
-Feito para aprendizado e uso pessoal, sinta-se livre para contribuir e melhorar!
-
----
-
-
-O Debug está em formato rar, depois disso é so correr o Tethering-Reverse-Easy-Start-Progam.exe
-
-[📦 Baixar debug (O app).rar](https://github.com/DannyJr97/Tethering-Reverse-Easy-Start-Progam/raw/master/Debug.rar)
-
-
-
+📦 Download debug (.rar)
