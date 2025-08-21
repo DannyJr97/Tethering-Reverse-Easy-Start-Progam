@@ -2,7 +2,7 @@
 Gnirehtet Easy Manager
 
 📄 Project Description
-Gnirehtet Easy Manager is a desktop application built in C# (Windows Forms, .NET Framework 4.8) to simplify the use of reverse tethering with gnirehtet — a tool that allows sharing your PC’s internet connection with your Android device via USB using a VPN tunnel.
+Gnirehtet Easy Manager is a desktop application built in C# (Windows Forms, .NET Framework 4.8) to simplify the use of reverse tethering with gnirehtet, a tool that allows sharing your PC’s internet connection with your Android device via USB using a VPN tunnel.
 
 ⚙️ What It Does
 This app streamlines the manual command-line workflow, automating common steps like:
